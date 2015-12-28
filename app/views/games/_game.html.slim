@@ -1,0 +1,8 @@
+div.col-xs-6.col-sm-3 style="padding: 20px; height: 250px; text-align: center;"
+
+  div.game-thumbnail
+  	= link_to(image_tag(game.thumbnail, size: '150x150'), "http://www.boardgamegeek.com#{game.url}")
+  div.game-name
+    = game.title
+  div.game-rating
+  	input.rating type="number" readonly=true step="0.5" value="#{game.rating}" max="10" style="font-size: 14px"

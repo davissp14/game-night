@@ -1,0 +1,15 @@
+
+
+div.row style="height: 50px;"
+
+div.row
+  div.col-xs-12.col-md-12
+    = form_tag(games_path, method: :get)
+	  = text_field_tag :game_title, params[:game_title], placeholder: "Enter board game title...", class: "form-control input-lg", type: "text"
+      - if flash[:error]
+	  	= flash[:error]
+
+br
+="#{@games.size} results returned"
+div.row
+  = render partial: 'game', collection: @games
