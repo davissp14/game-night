@@ -1,0 +1,51 @@
+
+class BGGExtended
+  BASE_URL = 'http://www.boardgamegeek.com'
+
+  class << self 
+
+    def scrape(game)
+    	page = Mechanize.new.get(BASE_URL + game.url)
+  	  if game.scrape?
+        game.update_attributes!(
+          num_players: num_players(page),
+          playtime: playtime(page), 
+          year_published: year_published(page), 
+          min_age: min_age(page),
+          description: description(page),
+          subdomain: subdomain(page),
+          last_scraped: Time.now
+        )
+      end
+  	  game.reload
+    end
+
+    def subdomain(html)
+      html.links_with(href: /\/boardgamesubdomain.*/).first.text
+    rescue
+      nil
+    end
+
+    def num_players(html)
+      html.search('div#edit_players').children[3].children.text.gsub(/\n\t*/, '')
+    end
+
+    def playtime(html)
+      html.search('div#edit_playtime').children[3].children.text.gsub(/\n\t*/, '')
+    end
+
+    def year_published(html)
+      html.search('div#edit_yearpublished').children[3].children.text.gsub(/\n\t*/, '')
+    end
+
+    def min_age(html)
+      html.search('div#edit_minage').children[3].children.text.gsub(/\n\t*/, '')
+    end 
+
+    def description(html)
+      html.at('meta[name="twitter:description"]')['content']
+    end
+  end
+
+end
+

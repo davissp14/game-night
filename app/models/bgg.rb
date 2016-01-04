@@ -1,46 +1,51 @@
+
 class BGG
-  class GameNotFound < StandardError; end
+  BASE_URL = 'http://www.boardgamegeek.com/geeksearch.php?action=search&objecttype=boardgame&q='
 
   class << self 
 
-    def find(title)
-  	  game_data = base_game_data(title.downcase)
-  	  if game_data.is_a?(Hash)
-  	  	extended_game_data(game_data['objectid'], game_data['name'])
-  	  else
-  	  	game_data.map{|data| extended_game_data(data['objectid'], data['name'])}
-  	  end
+    def scrape(title)
+    	page = Mechanize.new.get(BASE_URL + title.downcase)
+    	page.search("tr#row_").map do |row|
+    	  game = Game.find_or_initialize_by(game_id: game_id(row))
+    	  if game.scrape?
+          game.update_attributes(
+            title: title(row), 
+            url: url(row), 
+            thumbnail: thumbnail(row), 
+            rating: rating(row)
+          )
+        end
+        BGGExtended.scrape(game)
+    	end
     end
 
-    def base_game_data(title)
-	  boardgames = fetch_data_from("http://www.boardgamegeek.com/xmlapi/search?search=#{title}")
-	  raise GameNotFound if boardgames.blank?
-	  boardgames
+    def title(html)
+      html.search(".collection_objectname a").last.children.text
     end
 
-    def extended_game_data(game_id, name)
-  	  boardgame = fetch_data_from("http://www.boardgamegeek.com/xmlapi/boardgame/#{game_id}")
-  	  {
-  	  	object_id:      game_id,
-  	  	name:           name,
-  	    description:    boardgame['description'],
-  	    min_players:    boardgame['minplayers'],
-  	    max_players:    boardgame['maxplayers'],
-  	    year_published: boardgame['yearpublished'],
-  	    playtime:       boardgame['playingtime'],
-  	    thumbnail:      boardgame['thumbnail'],
-  	    image:          boardgame['image'],
-  	    publisher:      boardgame['boardgamepublisher']
-  	  }
+    def url(html)
+       html.search(".collection_objectname a").last.attributes['href'].value
     end
 
-    def fetch_data_from(url)
-	  xml_content = Net::HTTP.get(URI.parse(url))
-	  data = Hash.from_xml(xml_content)
-	  data['boardgames']['boardgame']
+    def thumbnail(html)
+  	  path = html.search("td.collection_thumbnail img").first['src']
+      arr = path.split('/')
+      arr[-1] = path.split('/').last.gsub('mt', 't')
+      arr.join('/')
     rescue 
-  	  nil 
+      "//cf.geekdo-images.com/images/pic1657689_t.jpg"
     end
 
-  end 
+    def rating(html)
+  	  html.search('td.collection_bggrating').children[0].text.to_f.round(2)
+    end
+
+    def game_id(html)
+    	url(html).split('/')[2]
+    end
+
+  end
+
 end
+

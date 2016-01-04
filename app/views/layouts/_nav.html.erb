@@ -1,0 +1,30 @@
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Game Night</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <%= form_tag(games_path, class: "navbar-form navbar-left", role: "search", method: :get) do %>
+        <div class="form-group input-group search-input">
+          <%= text_field_tag :game_title, params[:game_title], class: "form-control input-md", placeholder: "Search for a board game" %>
+        </div>
+        <%= submit_tag "Search", class: "btn btn-default" %>
+      <% end %>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">My Games</a></li>
+        <li><a href="#">Wish List</a></li>
+        <li><a href="#">Comrads</a></li>
+        <li><a href="#">Sign in</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div>
+</nav>

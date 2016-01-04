@@ -1,0 +1,38 @@
+<div class="game-container">
+	<div class="left">
+	  <%= image_tag(game.thumbnail, size: '150x150') %>
+	</div>
+	<div class="right">
+			<span class="user-dropdown">
+		<div class="dropdown">
+		  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+		    None
+		    <span class="caret"></span>
+		  </button>
+		  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+		    <li><a href="#">None</a></li>
+		    <li><a href="#">Wish list</a></li>
+		    <li><a href="#">Owned</a></li>
+		  </ul>
+		</div>
+	</span>
+	<div class="game-title"><%= "#{game.title} ( #{game.year_published})" %></div>
+
+	<span class="game-rating">
+		<input type="number" class="rating" readonly=true step="0.5" value="<%= game.rating %>" max="10" style="font-size: 14px;" />
+	</span>
+	<span class='game-categories'>
+		<span class="label label-primary">Card Games</span>
+		<span class="label label-info">Science Fiction</span>
+		<span class="label label-success">Fighting</span>
+	</span>
+
+	<div class="game-description">
+		<%= truncate(game.description, length: 600) %>
+	</div>
+  </div>
+</div>
+
+
+
+
