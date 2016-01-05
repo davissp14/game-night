@@ -3,6 +3,7 @@ div.wrapper {
 	background-color: #f3f3f4; 
 	height: 100vh;
 	height: 100%;
+	min-width: 1024px;
 }
 
 div.wrapper div.content {
@@ -10,7 +11,14 @@ div.wrapper div.content {
 	background-color: white;
 	max-width: 1366px;
 	width: 71%;
+	min-width: 1024px;
 	margin-left: auto;
 	margin-right: auto;
 	padding: 15px;
+	height: 100vh;
+	height: 100%;
+}
+
+div.container {
+    width: 1024px;
 }

@@ -7,6 +7,7 @@ class BGGExtended
     def scrape(game)
     	page = Mechanize.new.get(BASE_URL + game.url)
   	  if game.scrape?
+
         game.update_attributes!(
           num_players: num_players(page),
           playtime: playtime(page), 
@@ -14,6 +15,7 @@ class BGGExtended
           min_age: min_age(page),
           description: description(page),
           subdomain: subdomain(page),
+          category_ids: categories(page),
           last_scraped: Time.now
         )
       end
@@ -24,6 +26,13 @@ class BGGExtended
       html.links_with(href: /\/boardgamesubdomain.*/).first.text
     rescue
       nil
+    end
+
+    def categories(html)
+      cs = html.links_with(href: /\/boardgamecategory\/\d+\/.*/).map(&:text)
+      cs.map do |category|
+        Category.where(name: category).first_or_create.id
+      end
     end
 
     def num_players(html)

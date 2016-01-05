@@ -1,13 +1,33 @@
 
-nav.navbar-inverse {
+div.navbar-inverse {
 	background-color: #2f4050;
 	margin-bottom: 0px;
 	paddin-bottom: 0px;
-	.search-input {
-		width: 50vh;
-	}
-	.container-fluid {
-		max-width: 1366px;
-		width: 70%;
-	}
+	color: white;
+}
+
+@media(max-width:767px) {
+    .navbar .navbar-form {
+        width: 185px;
+        padding-left:0;
+        padding-right:0;
+    }
+}
+@media(min-width:768px) {
+    .navbar .navbar-form {
+        width: 250px;
+    }
+
+    .navbar .input-group {
+    	width: 550px;
+    }
+}
+.navbar .navbar-form {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-right: 0;
+    margin-left: 0;
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }

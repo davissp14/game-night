@@ -16,15 +16,16 @@
 		  </ul>
 		</div>
 	</span>
-	<div class="game-title"><%= "#{game.title} ( #{game.year_published})" %></div>
+	<div class="game-title"><%= "#{game.title} (#{game.year_published})" %></div>
 
 	<span class="game-rating">
 		<input type="number" class="rating" readonly=true step="0.5" value="<%= game.rating %>" max="10" style="font-size: 14px;" />
 	</span>
 	<span class='game-categories'>
-		<span class="label label-primary">Card Games</span>
-		<span class="label label-info">Science Fiction</span>
-		<span class="label label-success">Fighting</span>
+		<% labels = %w[primary success info default] %>
+		<% game.categories.each_with_index do |category, index| %>
+			<span class="label label-<%= labels[index] %>"><%= category.name %></span>
+		<% end %>
 	</span>
 
 	<div class="game-description">
@@ -32,7 +33,3 @@
 	</div>
   </div>
 </div>
-
-
-
-

@@ -1,7 +1,3 @@
-// Place all the styles related to the games controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
 div.game-container {
     width: 100%;
 	padding: 15px;
@@ -16,8 +12,7 @@ div.game-container {
 
 	div.right {
 	   padding-left: 10px;
-	   max-width: 1124px;
-	   width: 82%;
+	   width: 830px;
 	   display: inline-block;
 
 	    .game-title {
@@ -35,6 +30,9 @@ div.game-container {
 		.user-dropdown {
 			float: right;
 			vertical-align: top;
+		}
+		.game-description {
+			width: 100%;
 		}
 	}
 }

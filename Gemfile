@@ -4,14 +4,17 @@ gem 'rails', '4.2.3'
 
 
 gem 'sass-rails', '~> 5.0'
-
 gem 'bootstrap-sass', '~> 3.3.1'
 # gem 'sass-rails', github: 'rails/sass-rails'
 gem 'autoprefixer-rails'
 gem 'slim'
 gem 'mechanize'
-gem "pg"
-gem 'ratyrate'
+
+
+gem "mongoid"
+gem 'bson_ext'
+
+# gem 'ratyrate'
 
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'

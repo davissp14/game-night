@@ -1,30 +1,28 @@
-<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Game Night</a>
-    </div>
-
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <%= form_tag(games_path, class: "navbar-form navbar-left", role: "search", method: :get) do %>
-        <div class="form-group input-group search-input">
-          <%= text_field_tag :game_title, params[:game_title], class: "form-control input-md", placeholder: "Search for a board game" %>
-        </div>
-        <%= submit_tag "Search", class: "btn btn-default" %>
-      <% end %>
-
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">My Games</a></li>
-        <li><a href="#">Wish List</a></li>
-        <li><a href="#">Comrads</a></li>
-        <li><a href="#">Sign in</a></li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div>
-</nav>
+<div class="navbar navbar-inverse navbar-static-top">
+   <div class="container">
+      <div class="navbar-header">
+         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+         </button>
+         <a class="navbar-brand hidden-xs" href="#">Game Night</a>
+         <a class="navbar-brand visible-xs" href="#">GN</a>
+         <%= form_tag games_path, class: "navbar-form pull-left", role: "search", method: :get do %>
+            <div class="input-group">
+               <input type="text" class="form-control" placeholder="Search" name="game_title">
+               <div class="input-group-btn">
+                  <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+               </div>
+            </div>
+         <% end %>
+      </div>
+      <div class="navbar-collapse collapse">
+         <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">My Games</a></li>
+            <li><a href="#">Wish List</a></li>
+            <li><a href="#">Sign In</a></li>
+         </ul>
+      </div>
+   </div>
+</div>
