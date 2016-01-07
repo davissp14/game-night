@@ -2,10 +2,16 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.3'
 
+gem 'devise'
+
+gem 'gravtastic'
+
+gem  'will_paginate_mongoid'
+
 
 gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass', '~> 3.3.1'
-# gem 'sass-rails', github: 'rails/sass-rails'
+
 gem 'autoprefixer-rails'
 gem 'slim'
 gem 'mechanize'
@@ -14,7 +20,7 @@ gem 'mechanize'
 gem "mongoid"
 gem 'bson_ext'
 
-# gem 'ratyrate'
+gem 'htmlentities'
 
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'

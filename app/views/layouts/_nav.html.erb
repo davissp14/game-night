@@ -10,7 +10,7 @@
          <a class="navbar-brand visible-xs" href="#">GN</a>
          <%= form_tag games_path, class: "navbar-form pull-left", role: "search", method: :get do %>
             <div class="input-group">
-               <input type="text" class="form-control" placeholder="Search" name="game_title">
+               <input type="text" class="form-control" placeholder="Search" name="game_title" value="<%= params[:game_title] %>">
                <div class="input-group-btn">
                   <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
                </div>
@@ -19,10 +19,67 @@
       </div>
       <div class="navbar-collapse collapse">
          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">My Games</a></li>
-            <li><a href="#">Wish List</a></li>
-            <li><a href="#">Sign In</a></li>
+            <li class='profile' style="margin-right: 20px;">
+               <% if current_user.present? %>
+                  <div class='left' style='display: inline-block; font-size: 12px; position: relative; top: 10px; right: 3px;'>
+                     <div class="user_name" style='text-align: right;'>
+                        davissp14@gmail.com
+                     </div>
+                     <div class="user_actions" style="text-align: right;">
+                       <%= link_to "Profile", "#", style: 'color: white;' %> - 
+                       <%= link_to "Sign out", destroy_user_session_path, style: 'color: white;', method: :delete %>
+                     </div>
+                  </div>
+                  <div class='right' style="display: inline-block; vertical-align: top; padding-top: 5px;">
+                     <span class='user_photo'>
+                        <%= image_tag current_user.gravatar_url, size: '40x40' %>
+                     </span>
+                  </div>
+
+               <% else %>
+                  <%= link_to "Sign in", new_user_session_path %>
+               <% end %>
+            </li>
          </ul>
       </div>
    </div>
+</div>
+
+<div class="navbar navbar-default navbar-lower" role="navigation">
+  <div class="container">
+      <div class='row'>
+         <div class='col-md-6' style="padding: 15px; font-size: 14px;">
+            <% if @games.present? %>
+               <%= pagination_count(params[:page]) %> of <%= @raw_games.size %> results for <strong>"<%= params[:game_title] %>"</strong>
+            <% end %>
+         </div>
+         <div class='col-md-6 user_links' style='text-align: right; font-size: 16px; padding: 10px 15px 10px 0px;'>
+
+<!-- 
+            <div class="dropdown" style='display: inline-block; margin-right: 10px;'>
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Sort by
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="#">Rating</a></li>
+                <li><a href="#">Name - Acending</a></li>
+                <li><a href="#">Name - Decending</a></li>
+              </ul>
+            </div> -->
+
+
+            <%= button_tag class: "btn btn-default btn-sm" do %>
+               <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> My games
+            <% end %>
+            <%= button_tag class: "btn btn-default btn-sm" do %>
+               <span class="glyphicon glyphicon-cloud" aria-hidden="true"></span> Wish list
+            <% end %>
+            <%= button_tag class: "btn btn-default btn-sm" do %>
+               <span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Community
+            <% end %>
+         </div>
+
+      </div>
+  </div>
 </div>

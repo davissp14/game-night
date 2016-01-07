@@ -1,6 +1,25 @@
+div.navbar-lower {
+    min-height: 40px;
+    background-color: white;
+
+    .row {
+        padding: 0px, 15px;
+    }
+    .user_links a {
+       color: #2f4050;
+       font-weight: 400;
+    }
+}
+
+li.profile {
+    span.user_photo img {
+        border-radius: 5px;
+    } 
+}
 
 div.navbar-inverse {
 	background-color: #2f4050;
+    border-bottom: solid 3px black;
 	margin-bottom: 0px;
 	paddin-bottom: 0px;
 	color: white;

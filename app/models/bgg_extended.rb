@@ -1,3 +1,4 @@
+require 'htmlentities'
 
 class BGGExtended
   BASE_URL = 'http://www.boardgamegeek.com'
@@ -6,19 +7,17 @@ class BGGExtended
 
     def scrape(game)
     	page = Mechanize.new.get(BASE_URL + game.url)
-  	  if game.scrape?
-
-        game.update_attributes!(
-          num_players: num_players(page),
-          playtime: playtime(page), 
-          year_published: year_published(page), 
-          min_age: min_age(page),
-          description: description(page),
-          subdomain: subdomain(page),
-          category_ids: categories(page),
-          last_scraped: Time.now
-        )
-      end
+      game.update_attributes!(
+        num_players: num_players(page),
+        playtime: playtime(page), 
+        year_published: year_published(page), 
+        min_age: min_age(page),
+        description: description(page),
+        subdomain: subdomain(page),
+        category_ids: categories(page),
+        last_scraped: Time.now
+      )
+      puts "Done scraping #{game.title}"
   	  game.reload
     end
 
@@ -52,7 +51,7 @@ class BGGExtended
     end 
 
     def description(html)
-      html.at('meta[name="twitter:description"]')['content']
+      HTMLEntities.new.decode(html.at('meta[name="twitter:description"]')['content'])
     end
   end
 
