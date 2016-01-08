@@ -12,7 +12,7 @@ production:
           mode: :primary
         max_pool_size: 1
 
-production:
+development:
   clients:
     default:
       database: game_night_development
