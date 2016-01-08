@@ -1,3 +1,17 @@
+production:
+  clients:
+    default:
+      database: game-night
+      username: shaun
+      password: ginger
+      hosts:
+        - candidate.61.mongolayer.com:10658
+        - candidate.57.mongolayer.com:10798
+      options:
+        read:
+          mode: :primary
+        max_pool_size: 1
+
 development:
   # Configure available database clients. (required)
   clients:
