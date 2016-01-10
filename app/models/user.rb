@@ -36,4 +36,28 @@ class User
   # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
+
+  after_save do
+    if new_record?
+      self.wish_list.create!
+      self.collection.create!
+    end
+  end
+
+  has_one :wish_list
+  has_one :collection
+
+
+  def add_to_collection(tag, game)
+    target = self.collections.find_by(tag: tag)
+    target.games << game rescue nil 
+    target.save; self.save; self.reload
+  end
+
+  def fetch_collection(game)
+    self.collections.each do |collection|
+      return collection.tag if collection.games.include?(game)
+    end
+    nil
+  end
 end

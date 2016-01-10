@@ -1,0 +1,9 @@
+<% if @response %>
+  var link = $("#<%= @game.id.to_s%>").find('.wish-list')
+  link.removeClass('btn-default').addClass('btn-success')
+  link.find('i').removeClass('fa-plus').addClass('fa-minus')
+<% else %>
+  var link = $("#<%= @game.id.to_s%>").find('.wish-list')
+  link.removeClass('btn-success').addClass('btn-default')
+  link.find('i').removeClass('fa-minus').addClass('fa-plus')
+<% end %>

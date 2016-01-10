@@ -54,27 +54,12 @@
             <% end %>
          </div>
          <div class='col-md-6 user_links' style='text-align: right; font-size: 16px; padding: 10px 15px 10px 0px;'>
-
-<!-- 
-            <div class="dropdown" style='display: inline-block; margin-right: 10px;'>
-              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                Sort by
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a href="#">Rating</a></li>
-                <li><a href="#">Name - Acending</a></li>
-                <li><a href="#">Name - Decending</a></li>
-              </ul>
-            </div> -->
-
-
-            <%= button_tag class: "btn btn-default btn-sm" do %>
-               <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> My games
-            <% end %>
-            <%= button_tag class: "btn btn-default btn-sm" do %>
-               <span class="glyphicon glyphicon-cloud" aria-hidden="true"></span> Wish list
-            <% end %>
+          <%= link_to games_path(wish_list: true), class: "btn btn-default btn-sm" do %>
+            <span class="glyphicon glyphicon-cloud" aria-hidden="true"></span> Wish list
+          <% end %>
+          <%= link_to games_path(collection: true), class: "btn btn-default btn-sm" do %>
+            <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Collection
+          <% end %>
             <%= button_tag class: "btn btn-default btn-sm" do %>
                <span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Community
             <% end %>

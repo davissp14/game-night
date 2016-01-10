@@ -1,21 +1,28 @@
-<div class="game-container">
+<div class="game-container" id="<%= game.id %>">
 	<div class="left">
 	  <%= image_tag(game.thumbnail, size: '150x150') %>
 	</div>
 	<div class="right">
-			<span class="user-dropdown">
-		<div class="dropdown">
-		  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-		    None
-		    <span class="caret"></span>
-		  </button>
-		  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-		    <li><a href="#">None</a></li>
-		    <li><a href="#">Wish list</a></li>
-		    <li><a href="#">Owned</a></li>
-		  </ul>
-		</div>
-	</span>
+	  <div class='user-actions'>
+       <%= link_to game_collection_path(game), class: collection_class(game), remote: true, method: :post do %>
+       		<% if current_user && current_user.collection.games.include?(game) %>
+       		  <i class="fa fa-minus fa-lg"></i>
+			<% else %>
+			  <i class="fa fa-plus fa-lg"></i>
+			<% end %>
+			<span>Collection</span>
+        <% end %>
+
+        <%= link_to game_wish_list_path(game), class: wish_class(game), remote: true, method: :post do %>
+       		<% if current_user && current_user.wish_list.games.include?(game) %>
+       		  <i class="fa fa-minus fa-lg"></i>
+			<% else %>
+			  <i class="fa fa-plus fa-lg"></i>
+			<% end %>
+			<span>Wish list</span>
+        <% end %>
+
+	</div>
 	<div class="game-title"><%= "#{game.title} (#{game.year_published})" %></div>
 
 	<span class="game-rating">
